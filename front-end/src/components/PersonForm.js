@@ -24,6 +24,14 @@ const PersonForm = ({ onClose, onAdd }) => {
   };
 
   const handleSubmit = () => {
+    const trimmedNik = formData.nik.trim();
+    const trimmedNamaLengkap = formData.namaLengkap.trim();
+  
+    if (trimmedNik === '' || trimmedNamaLengkap === '') {
+      alert('NIK and Nama Lengkap are required.');
+      return;
+    }
+  
     axios.post('http://localhost:8080/api/persons', formData)
       .then((response) => {
         onAdd(response.data);
@@ -33,6 +41,7 @@ const PersonForm = ({ onClose, onAdd }) => {
         console.error('Error adding person:', error);
       });
   };
+  
 
   return (
     <div className="form-container">

@@ -72,8 +72,6 @@ function PersonList() {
     );
   };
 
-
-
   const handleDelete = async (nik) => {
     const shouldDelete = window.confirm('Are you sure you want to delete?');
 
