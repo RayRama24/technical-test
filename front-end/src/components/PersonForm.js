@@ -46,6 +46,7 @@ const PersonForm = ({ onClose, onAdd }) => {
             name="nik"
             value={formData.nik}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -55,6 +56,7 @@ const PersonForm = ({ onClose, onAdd }) => {
             name="namaLengkap"
             value={formData.namaLengkap}
             onChange={handleChange}
+            required
           />
         </label>
         <label>

@@ -64,7 +64,7 @@ const DetailPerson = ({ nik, onClose }) => {
           </div>
           <div className="form-group">
             <label>Tanggal Lahir:</label>
-            <input type="date" value={formatDate(person.tanggalLahir)} readOnly />
+            <input type="text" value={formatDate(person.tanggalLahir)} readOnly />
           </div>
           <div className="form-group">
             <label>Alamat:</label>

@@ -20,6 +20,8 @@ function PersonList() {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [detailNik, setDetailNik] = useState(null);
   const [updateNik, setUpdateNik] = useState(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [deleteNik, setDeleteNik] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/persons').then((response) => {
@@ -70,16 +72,25 @@ function PersonList() {
     );
   };
 
+
+
   const handleDelete = async (nik) => {
-    try {
-      await axios.delete(`http://localhost:8080/api/persons/${nik}`);
-      setPersons((prevPersons) => prevPersons.filter(person => person.nik !== nik));
-      
-      console.log(`Delete successful for NIK: ${nik}`);
-    } catch (error) {
-      console.error(`Error deleting for NIK: ${nik}`, error);
+    const shouldDelete = window.confirm('Are you sure you want to delete?');
+
+    if (shouldDelete) {
+      try {
+        await axios.delete(`http://localhost:8080/api/persons/${nik}`);
+        setPersons((prevPersons) => prevPersons.filter(person => person.nik !== nik));
+        
+        console.log(`Delete successful for NIK: ${nik}`);
+      } catch (error) {
+        console.error(`Error deleting for NIK: ${nik}`, error);
+      }
+    } else {
+      console.log(`Deletion canceled for NIK: ${nik}`);
     }
   };
+
 
   const handleSearch = () => {
     axios.get('http://localhost:8080/api/persons', {
@@ -158,7 +169,7 @@ function PersonList() {
       </table>
 
     
-      <Modal isOpen={showForm || showDetailModal || showUpdateForm} onClose={() => { setShowForm(false); setShowDetailModal(false); setShowUpdateForm(false); }}>
+      <Modal isOpen={showForm || showDetailModal || showUpdateForm } onClose={() => { setShowForm(false); setShowDetailModal(false); setShowUpdateForm(false);}}>
         {showForm && <PersonForm onClose={handleCloseForm} onAdd={handleAddPersonToList} />}
         {showDetailModal && <DetailPerson nik={detailNik} onClose={toggleDetailModal} />}
         {showUpdateForm && (
