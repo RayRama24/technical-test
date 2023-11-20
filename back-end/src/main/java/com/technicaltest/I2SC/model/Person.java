@@ -1,9 +1,6 @@
 package com.technicaltest.I2SC.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,9 +10,16 @@ import java.util.Date;
 public class Person {
 
     @Id
+    @Column(unique = true)
     private String nik;
+
+    @Column(name = "nama_lengkap", unique = true)
     private String namaLengkap;
+
+    @Column(name = "jenis_kelamin")
     private String jenisKelamin;
+
+    @Column(name = "tanggal_lahir")
     private Date tanggalLahir;
     private String alamat;
     private String negara;

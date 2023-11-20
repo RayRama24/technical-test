@@ -4,8 +4,10 @@ import com.technicaltest.I2SC.model.Person;
 import com.technicaltest.I2SC.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -30,6 +32,7 @@ public class PersonService {
     }
 
     public Person savePerson(Person person) {
+
         return personRepository.save(person);
     }
 
